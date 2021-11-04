@@ -1,5 +1,7 @@
 package com.zipcodewilmington;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -47,7 +49,6 @@ public class StringArrayUtils {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -58,7 +59,7 @@ public class StringArrayUtils {
     public static String[] reverse(String[] array) {
         String[] reverse = new String[array.length];
         int counter = 0;
-        
+
         for (int i = 1; i <= array.length; i++) {
             reverse[counter] = array[array.length-i];
             counter++;
@@ -71,7 +72,13 @@ public class StringArrayUtils {
      * @return true if the order of the array is the same backwards and forwards
      */ // TODO
     public static boolean isPalindromic(String[] array) {
-        return false;
+
+        for (int i = 0; i < array.length/2; i++) {
+            if (array[i] != array[array.length-i-1]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -79,6 +86,25 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+        //I want to compare each letter in the String array to the alphabet
+        //Does the String array need to be converted to a char array?
+        //while the current character in the alphabet array is not equal to the current char in the current string array index,
+        //move onto the next alphabet letter (counter),
+        //when a match is found, move onto the next character (2nd counter) in the current string index
+
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+
+        for(int i = 0; i < alphabet.length-1; i++) {
+            int counter = 0;
+            int charCounter = 0;
+            for (int j = 0; j < array[j].length()-1; j++) {
+                charCounter++;
+                while(alphabet[counter] != array[j].toLowerCase().charAt(charCounter)) {
+                    counter++;
+                }
+                return true;
+            }
+        }
         return false;
     }
 
@@ -88,16 +114,44 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
+        //if value matches the string in the current index of the array
+        //increase the occurrences counter, move onto the next index
+        int counter = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                counter ++;
+            } else if (array[i] != value) {
+                continue;
+            }
+        }
+        return counter;
     }
 
     /**
-     * @param array         array of String objects
+     * @param array array of String objects
      * @param valueToRemove value to remove from array
      * @return array with identical contents excluding values of `value`
      */ // TODO
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+        String[] newArray = new String[array.length-1];
+        int newArrayIndex = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != valueToRemove) {
+                newArray[newArrayIndex] = array[i];
+                newArrayIndex++;
+            } else if (array[i] == valueToRemove) {
+                continue;
+            }
+            //loop 1 --> i=0, array[0] = "The" == "The", continues
+            //loop 2 --> i=1, array[1] = "quick" != "The"
+                // newArray[0] = "quick", newArrayIndex = 1;
+            //loop 3 --> i=2, array[2] = "brown" != "The"
+                // newArray[1] = "brown", newArrayIndex = 2;
+            //etcetera
+        }
+        return newArray;
     }
 
     /**
@@ -105,7 +159,24 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+        int counter = 0;
+        int newArrayCounter = 0;
+
+        for (int i = 0; i < array.length-1; i++) {
+            if (array[i] == array[i+1]) {
+                counter++;
+            }
+        }
+        String[] newArray = new String[array.length-counter];
+
+        for (int i = 0; i < array.length-1; i++) {
+            if(array[i] != array[i+1]) {
+                newArray[newArrayCounter] = array[i];
+                newArrayCounter++;
+            }
+            newArray[newArrayCounter] = array[array.length-1];
+        }
+        return newArray;
     }
 
     /**
@@ -113,7 +184,28 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+        String concat = "";
+        int counter = 0;
+        int newArrayCounter = 0;
+
+        for (int i = 0; i < array.length-1; i++) {
+            if (array[i] == array[i+1]) {
+                counter++;
+            }
+        }
+
+        String[] newArray = new String[array.length-counter];
+
+        for (int i = 0; i < array.length-1; i++) {
+            if(array[i] == array[i+1]) {
+                newArray[newArrayCounter] = concat += array[i];
+                newArrayCounter++;
+            } else if(array[i] != array[i+1]) {
+                newArray[newArrayCounter] = array[i];
+            }
+        }
+
+        return newArray;
     }
 
 
