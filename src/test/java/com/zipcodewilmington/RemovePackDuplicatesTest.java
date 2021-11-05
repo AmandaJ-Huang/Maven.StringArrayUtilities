@@ -12,10 +12,8 @@ public class RemovePackDuplicatesTest {
     public void testRemovePackDuplicates1() {
         String[] array = {"a", "a", "a", "b", "c", "c", "a", "a", "d"};
         String[] expected = {"aaa", "b", "cc", "aa", "d"};
-        System.out.println(Arrays.toString(expected));
         String[] actual = StringArrayUtils.packConsecutiveDuplicates(array);
-        System.out.println(Arrays.toString(actual));
-        //Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 
@@ -24,7 +22,7 @@ public class RemovePackDuplicatesTest {
         String[] array = {"t", "t", "q", "a", "a", "a", "b", "c", "c", "a", "a", "d", "e", "e", "e"};
         String[] expected = {"tt", "q", "aaa", "b", "cc", "aa", "d", "eee"};
         String[] actual = StringArrayUtils.packConsecutiveDuplicates(array);
-        //Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 
@@ -34,7 +32,7 @@ public class RemovePackDuplicatesTest {
         String[] array = {"m", "o", "o", "n", "m", "a", "n"};
         String[] expected = {"m", "oo", "n", "m", "a", "n"};
         String[] actual = StringArrayUtils.packConsecutiveDuplicates(array);
-        //Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expected, actual);
     }
 
 

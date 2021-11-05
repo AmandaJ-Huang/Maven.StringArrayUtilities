@@ -1,6 +1,6 @@
 package com.zipcodewilmington;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import java.util.ArrayList;
 
 /**
  * Created by leon on 1/29/18.
@@ -184,29 +184,43 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        String concat = "";
-        int counter = 0;
-        int newArrayCounter = 0;
 
-        for (int i = 0; i < array.length-1; i++) {
-            if (array[i] == array[i+1]) {
-                counter++;
+        String[] newArray;
+        String concat = array[0];
+
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == array[i-1]) {
+                concat += array[i]; //"" + "a" = "a"
+            } else {
+                concat += " " + array[i];
             }
         }
-
-        String[] newArray = new String[array.length-counter];
-
-        for (int i = 0; i < array.length-1; i++) {
-            if(array[i] == array[i+1]) {
-                newArray[newArrayCounter] = concat += array[i];
-                newArrayCounter++;
-            } else if(array[i] != array[i+1]) {
-                newArray[newArrayCounter] = array[i];
-            }
-        }
+        newArray = concat.split(" ");
 
         return newArray;
     }
 
+
+
+
+
+
+//        for (int i = 0; i < array.length-1; i++) {
+//            if (array[i] == array[i+1]) {
+//                counter++;
+//            }
+//        }
+//        for (int i = 0; i < array.length-1; i++) {
+//            if(array[i] != array[i+1]) {
+//                newArray[newArrayCounter] = array[i];
+//                newArrayCounter++;
+//            } else {
+//                concat += array[i] + array[i+1];
+//                newArray[newArrayCounter] = concat;
+//            }
+//if array[i] = array[i+1]
+//then concat array[i] + array[i+1]
+//if array[i] != array[i+1]
+//newArray[index] = array[i]
 
 }
